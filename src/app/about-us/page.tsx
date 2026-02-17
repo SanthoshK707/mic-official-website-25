@@ -163,18 +163,8 @@ const MysteryCard = ({
         right: 8px;
         bottom: 8px;
         border-radius: 4px;
- issue-10-Improve-Scroll-Indication-and-Box-Sizing-on-About-Us-Page
         left: 8px; top: 8px; right: 8px; bottom: 8px;
         border-radius: 4px;
-        z-index: 8;
-      }
-      .corner-dot {
-        width: 18px; height: 18px; border-radius: 50%;
-        position: absolute; z-index: 10;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-
-        left: 5px; top: 5px; right: 5px; bottom: 5px;
-        border-radius: 0;
         z-index: 8;
       }
 
@@ -190,22 +180,24 @@ const MysteryCard = ({
         background-clip: padding-box;
       }
       .top-left {
-        top: 20px;
-        left: 20px;
-      }
-      .top-right {
-        top: 20px;
-        right: 20px;
-      }
-      .bottom-left {
-        bottom: 20px;
-        left: 20px;
-      }
-      .bottom-right {
-        bottom: 20px;
-        right: 20px;
+        top: 8px;
+        left: 8px;
       }
 
+      .top-right {
+        top: 8px;
+        right: 8px;
+      }
+
+      .bottom-left {
+        bottom: 8px;
+        left: 8px;
+      }
+
+      .bottom-right {
+        bottom: 8px;
+        right: 8px;
+      }
 
       .fixed-title {
         position: absolute;
