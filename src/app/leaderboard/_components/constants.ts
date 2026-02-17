@@ -78,6 +78,8 @@ export function getThemeColors(isDarkMode: boolean) {
       background: 'linear-gradient(to bottom, #00040d 0%, #002855 100%)',
       gridOpacity: 'rgba(255, 255, 255, 0.1)',
       textColor: 'text-white',
+      screenTextColor: '#f8fafc',
+      screenAccentColor: '#fde047',
       lineColor: '#0B3A79',
       borderColor: '#1e40af',
     };
@@ -86,6 +88,8 @@ export function getThemeColors(isDarkMode: boolean) {
       background: 'linear-gradient(to bottom, #e0f2fe 0%, #87ceeb 100%)',
       gridOpacity: 'rgba(255, 255, 255, 0.3)',
       textColor: 'text-gray-900',
+      screenTextColor: '#e2e8f0',
+      screenAccentColor: '#fbbf24',
       lineColor: '#1e88e5',
       borderColor: '#3b82f6',
     };

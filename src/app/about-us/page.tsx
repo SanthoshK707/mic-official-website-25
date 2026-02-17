@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { useDarkMode } from "@/hooks/useDarkMode";
 
 // Larger cloud images & new variety
 const cloudImages = [
@@ -50,6 +51,28 @@ function useCloudFloat({
   return { top, left: baseLeft };
 }
 
+function getThemeColors(isDarkMode: boolean) {
+  return isDarkMode
+    ? {
+        background: "linear-gradient(to bottom, #00040d 0%, #002855 100%)",
+        gridOpacity1: "rgba(255,255,255,0.09)",
+        gridOpacity2: "rgba(255,255,255,0.07)",
+        headingColor: "#fff",
+        headingTextShadow: "4px 4px 0 #000, 0 2px 8px #000",
+        starOpacity: 0.85,
+        cardTextColor: "#444",
+      }
+    : {
+        background: "linear-gradient(to bottom, #e0f2fe 0%, #87ceeb 100%)",
+        gridOpacity1: "rgba(255,255,255,0.3)",
+        gridOpacity2: "rgba(255,255,255,0.3)",
+        headingColor: "#1e293b",
+        headingTextShadow: "2px 2px 0 rgba(255,255,255,0.7), 0 1px 4px rgba(0,0,0,0.15)",
+        starOpacity: 0.4,
+        cardTextColor: "#333",
+      };
+}
+
 const MysteryCard = ({
   frameColor,
   innerColor,
@@ -57,6 +80,7 @@ const MysteryCard = ({
   title,
   desc,
   style,
+  cardTextColor,
 }: {
   frameColor: string;
   innerColor: string;
@@ -64,6 +88,7 @@ const MysteryCard = ({
   title: string;
   desc: string;
   style?: React.CSSProperties;
+  cardTextColor?: string; 
 }) => (
   <div
     className="mystery-card group"
@@ -83,7 +108,7 @@ const MysteryCard = ({
       <h3>{title}</h3>
     </div>
     <div className="scrollable-content" style={{ color: dotColor }}>
-      <p>{desc}</p>
+      <p style={{ color: cardTextColor || "#444" }}>{desc}</p>
     </div>
     <div className="hover-question">
       <span style={{ color: dotColor }}>?</span>
@@ -138,18 +163,8 @@ const MysteryCard = ({
         right: 8px;
         bottom: 8px;
         border-radius: 4px;
- issue-10-Improve-Scroll-Indication-and-Box-Sizing-on-About-Us-Page
         left: 8px; top: 8px; right: 8px; bottom: 8px;
         border-radius: 4px;
-        z-index: 8;
-      }
-      .corner-dot {
-        width: 18px; height: 18px; border-radius: 50%;
-        position: absolute; z-index: 10;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-
-        left: 5px; top: 5px; right: 5px; bottom: 5px;
-        border-radius: 0;
         z-index: 8;
       }
 
@@ -165,22 +180,24 @@ const MysteryCard = ({
         background-clip: padding-box;
       }
       .top-left {
-        top: 20px;
-        left: 20px;
-      }
-      .top-right {
-        top: 20px;
-        right: 20px;
-      }
-      .bottom-left {
-        bottom: 20px;
-        left: 20px;
-      }
-      .bottom-right {
-        bottom: 20px;
-        right: 20px;
+        top: 8px;
+        left: 8px;
       }
 
+      .top-right {
+        top: 8px;
+        right: 8px;
+      }
+
+      .bottom-left {
+        bottom: 8px;
+        left: 8px;
+      }
+
+      .bottom-right {
+        bottom: 8px;
+        right: 8px;
+      }
 
       .fixed-title {
         position: absolute;
@@ -364,6 +381,7 @@ const STAR_POSITIONS = [
 ].map((pos) => ({ ...pos, size: Math.random() * 2 + 3 }));
 
 const AboutUsPage: React.FC = () => {
+  const isDarkMode = useDarkMode();
   const cloudPositions = [
     useCloudFloat({ baseTop: 130, baseLeft: -12, amplitude: 25, speed: 0.8, phase: 0 }),
     useCloudFloat({ baseTop: 440, baseLeft: 22, amplitude: 35, speed: 1.1, phase: 1 }),
@@ -386,9 +404,14 @@ const AboutUsPage: React.FC = () => {
     document.documentElement.style.minHeight = "100vh";
     document.documentElement.style.overflowX = "hidden";
     document.documentElement.style.overflowY = "auto";
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
   }, []);
 
   const lift = 80;
+  const themeColors = getThemeColors(isDarkMode);
 
   return (
     <>
@@ -396,9 +419,9 @@ const AboutUsPage: React.FC = () => {
         className="page-container"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.09) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px),
-            linear-gradient(to bottom, #00040d 0%, #002855 100%)
+            linear-gradient(to right, ${themeColors.gridOpacity1} 1px, transparent 1px),
+            linear-gradient(to bottom, ${themeColors.gridOpacity2} 1px, transparent 1px),
+            ${themeColors.background}
           `,
           backgroundSize: "30px 30px, 30px 30px, 100% 100%",
           backgroundRepeat: "repeat, repeat, no-repeat",
@@ -409,6 +432,7 @@ const AboutUsPage: React.FC = () => {
           minHeight: "100vh",
           paddingBottom: "172px",
           position: "relative",
+          transition: "background 0.5s ease",
         }}
       >
         {/* Stars scattered across the background */}
@@ -426,7 +450,8 @@ const AboutUsPage: React.FC = () => {
               zIndex: 1,
               pointerEvents: "none",
               userSelect: "none",
-              opacity: 0.85,
+              opacity: themeColors.starOpacity,
+              transition: "opacity 0.5s ease",
             }}
           />
         ))}
@@ -454,7 +479,15 @@ const AboutUsPage: React.FC = () => {
         ))}
 
         <div className="about-heading">
-          <h1>About us</h1>
+          <h1
+            style={{
+              color: themeColors.headingColor, // Use theme color
+              textShadow: themeColors.headingTextShadow, // Use theme shadow
+              transition: "color 0.5s ease, text-shadow 0.5s ease", // Add transition
+            }}
+          >
+            About us
+          </h1>
         </div>
 
         <div className="cards-container">
@@ -465,6 +498,7 @@ const AboutUsPage: React.FC = () => {
             title="About MIC"
             desc="The MIC at VIT Chennai is a student-led tech community under the (MLSA) program. It's a space where students explore and innovate with technologies like AI, Azure, and GitHub. Whether you're a beginner or a builder, we offer an inclusive platform for collaboration, curiosity, and hands-on learning through real-world experiences."
             style={{ marginTop: 0 }}
+            cardTextColor={themeColors.cardTextColor}
           />
           <MysteryCard
             frameColor="#f7a8a8"
@@ -473,6 +507,7 @@ const AboutUsPage: React.FC = () => {
             title="What we do!"
             desc="We host hands-on workshops, speaker sessions, and hackathons focused on Microsoft technologies like Azure, Power Platform, and Copilot. These events help students build skills, explore emerging tech, and grow into confident, well-rounded tech leaders."
             style={{ marginTop: lift }}
+            cardTextColor={themeColors.cardTextColor}
           />
           <MysteryCard
             frameColor="#7faee3"
@@ -481,6 +516,7 @@ const AboutUsPage: React.FC = () => {
             title="What you get!"
             desc="We focus on leadership, teamwork, and communication alongside coding. Our club supports personal and professional growth, helping members build confidence and strong networks. No matter your background, you'll find a welcoming community that learns, creates, and grows together."
             style={{ marginTop: 0 }}
+            cardTextColor={themeColors.cardTextColor}
           />
         </div>
       </div>
@@ -515,10 +551,8 @@ const AboutUsPage: React.FC = () => {
         }
         .about-heading h1 {
           font-family: "Press Start 2P", monospace;
-          color: #fff;
           font-size: clamp(2.1rem, 6vw, 3.3rem);
           letter-spacing: 2px;
-          text-shadow: 4px 4px 0 #000, 0 2px 8px #000;
           text-transform: capitalize;
           margin: 0;
           line-height: 1;

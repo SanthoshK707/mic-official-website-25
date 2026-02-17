@@ -9,6 +9,8 @@ interface PodiumProps {
     textColor: string;
     lineColor: string;
     borderColor: string;
+    screenTextColor?: string;
+    screenAccentColor?: string;
   };
 }
 
@@ -59,7 +61,7 @@ export function Podium({ podium, themeColors }: PodiumProps) {
                 fontFamily: SANS_FONT,
                 fontWeight: 700,
                 fontSize: 12, // Reduced from 16 for Press Start 2P
-                color: themeColors?.textColor === 'text-white' ? '#fff' : '#1f2937',
+                color: themeColors?.screenTextColor ?? (themeColors?.textColor === 'text-white' ? '#fff' : '#1f2937'),
                 textShadow: themeColors?.textColor === 'text-white' ? '0 2px 8px #000, 0 0 1px #000' : '0 2px 8px rgba(0,0,0,0.1), 0 0 1px rgba(0,0,0,0.1)',
                 lineHeight: 1.15,
                 letterSpacing: 0.5,
@@ -73,7 +75,7 @@ export function Podium({ podium, themeColors }: PodiumProps) {
                   fontFamily: MONO_FONT,
                   fontWeight: 600,
                   fontSize: 11, // Reduced from 15 for Press Start 2P
-                  color: themeColors?.textColor === 'text-white' ? '#ffe066' : '#f59e0b',
+                  color: themeColors?.screenAccentColor ?? (themeColors?.textColor === 'text-white' ? '#ffe066' : '#f59e0b'),
                   letterSpacing: '0.08em',
                   textShadow: themeColors?.textColor === 'text-white' ? '0 2px 8px #222, 0 0 2px #ffe066' : '0 2px 8px rgba(0,0,0,0.1), 0 0 2px #f59e0b',
                 }}

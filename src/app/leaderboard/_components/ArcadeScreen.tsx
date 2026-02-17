@@ -10,6 +10,7 @@ interface ArcadeScreenProps {
     textColor: string;
     lineColor: string;
     borderColor: string;
+    screenTextColor?: string;
   };
 }
 
@@ -23,7 +24,7 @@ export function ArcadeScreen({ tab, themeColors }: ArcadeScreenProps) {
         width: SCREEN.width,
         height: SCREEN.height,
         zIndex: 2,
-        color: themeColors.textColor === 'text-white' ? 'white' : '#1f2937',
+        color: themeColors.screenTextColor ?? (themeColors.textColor === 'text-white' ? 'white' : '#1f2937'),
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',

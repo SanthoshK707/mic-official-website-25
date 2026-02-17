@@ -551,7 +551,7 @@ const LandingPage = () => {
 				}}
 			/>
 			<img
-				src="/ghost.png"
+				src="/yellowghost.png"
 				alt="Left Decor"
 				className="absolute z-30 animate-bounce"
 				style={{
@@ -559,6 +559,7 @@ const LandingPage = () => {
 					height: "min(2.1vw, 33px)",
 					top: "43vh",
 					left: "10.5vw",
+				filter: "hue-rotate(-28deg) saturate(1.55)",
 				}}
 			/>
 			<img
@@ -637,6 +638,7 @@ const LandingPage = () => {
 								padding: "min(1.6vw, 24px)",
 								position: "relative",
 								border: `min(0.8vw, 12px) solid ${event.borderColor}`,
+								overflow: "hidden",
 							}}
 							onClick={() => setOpenCard(i)}
 						>
@@ -644,6 +646,11 @@ const LandingPage = () => {
 								style={{
 									fontSize: "min(1.3vw, 20px)",
 									marginBottom: "min(0.8vh, 12px)",
+									overflow: "hidden",
+									display: "-webkit-box",
+									WebkitLineClamp: 2,
+									WebkitBoxOrient: "vertical",
+									wordBreak: "break-word",
 								}}
 							>
 								{event.title}
@@ -667,6 +674,11 @@ const LandingPage = () => {
 								style={{
 									fontFamily: "'IBM Plex Mono', monospace",
 									fontSize: "min(0.9vw, 14px)",
+									overflow: "hidden",
+									display: "-webkit-box",
+									WebkitLineClamp: 3,
+									WebkitBoxOrient: "vertical",
+									wordBreak: "break-word",
 								}}
 							>
 								{event.desc}
@@ -745,6 +757,7 @@ const LandingPage = () => {
 								padding: "min(1.6vw, 24px)",
 								position: "relative",
 								border: `min(0.8vw, 12px) solid ${event.borderColor}`,
+								overflow: "hidden",
 							}}
 							onClick={() => setOpenCard(i + 3)}
 						>
@@ -752,6 +765,11 @@ const LandingPage = () => {
 								style={{
 									fontSize: "min(1.3vw, 20px)",
 									marginBottom: "min(0.8vh, 12px)",
+									overflow: "hidden",
+									display: "-webkit-box",
+									WebkitLineClamp: 2,
+									WebkitBoxOrient: "vertical",
+									wordBreak: "break-word",
 								}}
 							>
 								{event.title}
@@ -775,6 +793,11 @@ const LandingPage = () => {
 								style={{
 									fontFamily: "'IBM Plex Mono', monospace",
 									fontSize: "min(0.9vw, 14px)",
+									overflow: "hidden",
+									display: "-webkit-box",
+									WebkitLineClamp: 3,
+									WebkitBoxOrient: "vertical",
+									wordBreak: "break-word",
 								}}
 							>
 								{event.desc}
@@ -830,7 +853,7 @@ const LandingPage = () => {
 			<img
 				src="/yellowghost.png"
 				alt="Top Left Ghost"
-				className="absolute top-20 left-20 z-50"
+				className="absolute top-20 left-20 z-50 animate-bounce"
 				style={{
 					width: "min(2.1vw, 32px)",
 					height: "min(2.1vw, 32px)",
@@ -839,7 +862,7 @@ const LandingPage = () => {
 			<img
 				src="/redghost.png.png"
 				alt="Top Right Ghost"
-				className="absolute top-20 right-20 z-50"
+				className="absolute top-20 right-20 z-50 animate-bounce"
 				style={{
 					width: "min(2.1vw, 32px)",
 					height: "min(2.1vw, 32px)",
@@ -848,7 +871,7 @@ const LandingPage = () => {
 			<img
 				src="/blueghost.png"
 				alt="Bottom Left Ghost"
-				className="absolute bottom-24 left-20 z-50"
+				className="absolute bottom-24 left-20 z-50 animate-bounce"
 				style={{
 					width: "min(2.1vw, 32px)",
 					height: "min(2.1vw, 32px)",
@@ -857,7 +880,7 @@ const LandingPage = () => {
 			<img
 				src="/pinkghost (1).png"
 				alt="Bottom Right Ghost"
-				className="absolute bottom-20 right-20 z-50"
+				className="absolute bottom-20 right-20 z-50 animate-bounce"
 				style={{
 					width: "min(2.1vw, 32px)",
 					height: "min(2.1vw, 32px)",
@@ -901,4 +924,5 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
 
